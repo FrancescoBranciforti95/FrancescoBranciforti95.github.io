@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francesco Branciforti — Engineer-scientist</title>
+<meta name="description" content="Francesco Branciforti, PhD bioengineer and data scientist. Research-grade AI shipped as working software — from multi-scale biomedical imaging to enterprise AI and the eGameX platform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14110D; --ink-2:#1B1712; --ink-3:#251F18;
+    --bone:#ECE4D6; --bone-dim:#B7AD9B; --muted:#857B6C;
+    --line:rgba(236,228,214,.10); --line-strong:rgba(236,228,214,.18);
+    --amber:#E0913A; --amber-soft:#F2BD7C; --teal:#62B6AA;
+    --serif:"IBM Plex Serif",Georgia,serif;
+    --sans:"IBM Plex Sans",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --maxw:1140px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--ink);color:var(--bone);font-family:var(--sans);
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--amber);color:var(--ink)}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--amber);font-weight:500;display:block;margin-bottom:18px}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;letter-spacing:-.01em}
+  .serif-i{font-style:italic;color:var(--amber-soft)}
+
+  /* scroll progress */
+  #progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--amber);z-index:120;transition:width .1s linear}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(20,17,13,.72);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line)}
+  .nav-in{max-width:var(--maxw);margin:0 auto;padding:14px 28px;
+    display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--bone)}
+  .brand b{color:var(--amber);font-weight:600}
+  .nav-links{display:flex;gap:26px;font-family:var(--mono);font-size:12.5px;
+    letter-spacing:.06em;text-transform:uppercase}
+  .nav-links a{color:var(--bone-dim);transition:color .2s;position:relative;padding:4px 0}
+  .nav-links a:hover,.nav-links a.active{color:var(--bone)}
+  .nav-links a.active::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:1px;background:var(--amber)}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line-strong);color:var(--bone);
+    font-family:var(--mono);font-size:12px;padding:7px 12px;cursor:pointer;border-radius:2px}
+
+  /* hero */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;
+    padding:120px 0 80px;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0;
+    background:
+      radial-gradient(120% 80% at 78% 18%, rgba(224,145,58,.16), transparent 55%),
+      radial-gradient(90% 90% at 12% 100%, rgba(98,182,170,.07), transparent 60%);
+  }
+  .hero-grid{position:absolute;inset:0;z-index:0;opacity:.5;
+    background-image:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(120% 70% at 70% 30%,#000,transparent 75%);
+    mask-image:radial-gradient(120% 70% at 70% 30%,#000,transparent 75%)}
+  .hero-in{position:relative;z-index:1;width:100%}
+  .hero h1{font-size:clamp(2.6rem,6.2vw,5rem);max-width:14ch;margin-bottom:28px}
+  .hero p.lede{font-size:clamp(1.05rem,1.7vw,1.3rem);color:var(--bone-dim);
+    max-width:56ch;margin-bottom:38px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px}
+  .chip{font-family:var(--mono);font-size:12px;letter-spacing:.04em;
+    color:var(--bone-dim);border:1px solid var(--line-strong);
+    padding:7px 13px;border-radius:2px;background:rgba(236,228,214,.02)}
+  .chip b{color:var(--amber);font-weight:500}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px}
+  .btn{font-family:var(--mono);font-size:13px;letter-spacing:.05em;text-transform:uppercase;
+    padding:14px 22px;border-radius:2px;transition:transform .15s,background .2s,color .2s;display:inline-block}
+  .btn-primary{background:var(--amber);color:var(--ink);font-weight:600}
+  .btn-primary:hover{transform:translateY(-2px);background:var(--amber-soft)}
+  .btn-ghost{border:1px solid var(--line-strong);color:var(--bone)}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+
+  /* sections */
+  section{padding:100px 0;position:relative}
+  .sec-head{margin-bottom:54px;max-width:62ch}
+  .sec-head h2{font-size:clamp(1.9rem,3.6vw,2.9rem);margin-bottom:16px}
+  .sec-head p{color:var(--bone-dim);font-size:1.05rem}
+  .divider{height:1px;background:var(--line);max-width:var(--maxw);margin:0 auto}
+
+  /* eGameX flagship */
+  .flag{border:1px solid var(--line-strong);border-radius:6px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(98,182,170,.05),rgba(236,228,214,.01))}
+  .flag-top{padding:36px 40px;border-bottom:1px solid var(--line);
+    display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .flag-title{font-family:var(--serif);font-size:2.4rem;line-height:1}
+  .live{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--teal);border:1px solid rgba(98,182,170,.4);padding:6px 11px;border-radius:2px;
+    display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+  .live .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);
+    box-shadow:0 0 0 0 rgba(98,182,170,.6);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(98,182,170,.5)}70%{box-shadow:0 0 0 8px rgba(98,182,170,0)}100%{box-shadow:0 0 0 0 rgba(98,182,170,0)}}
+  @media (prefers-reduced-motion:reduce){.live .dot{animation:none}}
+  .flag-body{padding:34px 40px}
+  .flag-body>p{color:var(--bone-dim);max-width:64ch;margin-bottom:26px}
+  .flag-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px 40px;margin-bottom:28px}
+  .flag-grid .it{display:flex;gap:13px;font-size:.97rem}
+  .flag-grid .it span{color:var(--teal);font-family:var(--mono);flex:none}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{font-family:var(--mono);font-size:11.5px;color:var(--muted);
+    border:1px solid var(--line);padding:5px 10px;border-radius:2px}
+
+  /* work cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{border:1px solid var(--line);border-radius:5px;padding:26px 24px;background:var(--ink-2);
+    transition:border-color .2s,transform .2s}
+  .card:hover{border-color:var(--line-strong);transform:translateY(-3px)}
+  .card .role{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:12px;display:block}
+  .card h3{font-family:var(--sans);font-weight:600;font-size:1.15rem;margin-bottom:10px;letter-spacing:0}
+  .card p{font-size:.93rem;color:var(--bone-dim);line-height:1.55}
+
+  /* research / multi-scale spine */
+  .research-intro{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;
+    align-items:flex-end;margin-bottom:60px}
+  .research-intro .thesis{max-width:60ch}
+  .research-intro .thesis em{font-family:var(--serif);font-style:italic;color:var(--bone);
+    font-size:1.2rem;display:block;margin-bottom:14px}
+  .doc-links{display:flex;gap:12px;flex-wrap:wrap}
+  .doc-links a{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--bone);
+    border:1px solid var(--line-strong);padding:11px 16px;border-radius:2px;transition:.2s;white-space:nowrap}
+  .doc-links a:hover{border-color:var(--amber);color:var(--amber)}
+
+  .scale{position:relative;padding-left:108px}
+  .scale::before{content:"";position:absolute;left:84px;top:8px;bottom:8px;width:1px;background:var(--line-strong)}
+  .tier{position:relative;padding-bottom:64px}
+  .tier:last-child{padding-bottom:0}
+  .tier .mark{position:absolute;left:-108px;top:0;width:74px;text-align:right}
+  .tier .unit{font-family:var(--mono);font-size:1.05rem;color:var(--amber);font-weight:600;display:block}
+  .tier .scope{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);margin-top:4px;display:block}
+  .tier::before{content:"";position:absolute;left:-28px;top:7px;width:9px;height:9px;border-radius:50%;
+    background:var(--amber);border:2px solid var(--ink)}
+  .tier h3{font-family:var(--sans);font-weight:600;font-size:1.2rem;letter-spacing:0;margin-bottom:10px}
+  .tier>p{color:var(--bone-dim);max-width:60ch;margin-bottom:20px;font-size:.97rem}
+
+  figure{margin:0}
+  .fig{border:1px solid var(--line);border-radius:5px;overflow:hidden;background:#000}
+  .fig img{width:100%;display:block}
+  figcaption{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.5;
+    padding:11px 14px;border-top:1px solid var(--line);background:var(--ink-2)}
+  figcaption a{color:var(--bone-dim);border-bottom:1px solid var(--line-strong)}
+  figcaption a:hover{color:var(--amber)}
+  .spot{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:8px}
+  .spot .lbl{font-family:var(--sans);font-weight:600;margin-bottom:8px;font-size:1.02rem}
+  .spot .desc{color:var(--bone-dim);font-size:.92rem;margin-bottom:16px}
+
+  /* publications */
+  .pub-feat{border:1px solid rgba(224,145,58,.35);border-radius:5px;padding:26px 28px;
+    background:linear-gradient(180deg,rgba(224,145,58,.07),transparent);margin-bottom:34px}
+  .pub-feat .star{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:12px;display:block}
+  .pub-feat .t{font-family:var(--serif);font-size:1.25rem;line-height:1.3;margin-bottom:8px}
+  .pub-feat .v{color:var(--bone-dim);font-size:.95rem}
+  .pub-feat .v b{color:var(--bone)}
+  .pub-grp{border-top:1px solid var(--line);padding:24px 0}
+  .pub-grp .gname{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--amber);margin-bottom:18px;display:block}
+  .pub-grp ul{list-style:none}
+  .pub-grp li{padding:11px 0;border-bottom:1px solid var(--line);font-size:.96rem;color:var(--bone-dim)}
+  .pub-grp li:last-child{border-bottom:none}
+  .pub-grp li b{color:var(--bone);font-weight:600}
+  .pub-grp li .j{font-style:italic}
+  .pub-grp li a{color:var(--amber);font-family:var(--mono);font-size:11px;letter-spacing:.05em;
+    border:1px solid var(--line);padding:2px 8px;border-radius:2px;margin-left:6px;white-space:nowrap}
+  .pub-grp li a:hover{border-color:var(--amber)}
+  .scholar{font-family:var(--mono);font-size:12px;color:var(--bone-dim);margin-top:24px}
+  .scholar b{color:var(--bone)}
+  .scholar a{color:var(--amber)}
+
+  /* stack */
+  .stack-row{display:grid;grid-template-columns:170px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--line);align-items:start}
+  .stack-row .k{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);padding-top:5px}
+  .pills{display:flex;flex-wrap:wrap;gap:9px}
+  .pill{font-family:var(--mono);font-size:12.5px;color:var(--bone);border:1px solid var(--line-strong);
+    padding:7px 13px;border-radius:2px;background:rgba(236,228,214,.02)}
+
+  /* contact */
+  .contact{text-align:center}
+  .contact h2{font-size:clamp(2rem,4.5vw,3.4rem);margin-bottom:20px}
+  .contact .avail{font-family:var(--mono);font-size:13px;color:var(--teal);letter-spacing:.05em;margin-bottom:34px}
+  .contact-links{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+
+  footer{border-top:1px solid var(--line);padding:34px 0;text-align:center}
+  footer p{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+  footer a{color:var(--bone-dim)}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  @media (max-width:880px){
+    .nav-links{position:fixed;inset:56px 0 auto 0;background:rgba(20,17,13,.97);
+      flex-direction:column;gap:0;padding:8px 0;border-bottom:1px solid var(--line);display:none}
+    .nav-links.open{display:flex}
+    .nav-links a{padding:14px 28px}
+    .nav-toggle{display:block}
+    .cards{grid-template-columns:1fr}
+    .flag-grid{grid-template-columns:1fr}
+    .spot{grid-template-columns:1fr}
+    .stack-row{grid-template-columns:1fr;gap:12px}
+    .flag-top,.flag-body{padding-left:24px;padding-right:24px}
+    .scale{padding-left:72px}
+    .scale::before{left:52px}
+    .tier .mark{left:-72px;width:44px}
+    .tier .scope{display:none}
+    .tier::before{left:-25px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<nav>
+  <div class="nav-in">
+    <a href="#top" class="brand"><b>F.</b> Branciforti</a>
+    <button class="nav-toggle" id="navToggle">MENU</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#egamex">eGameX</a>
+      <a href="#work">Work</a>
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#stack">Stack</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="wrap hero-in">
+    <span class="eyebrow">PhD Bioengineering · Data Science · Agentic Coding</span>
+    <h1>Research-grade AI, <span class="serif-i">shipped</span> as working software.</h1>
+    <p class="lede">I'm Francesco Branciforti. I pair the rigor I built in the lab — validation, robustness, traceability — with agentic engineering that gets production systems live. From multi-scale biomedical imaging to enterprise AI and a live esports platform.</p>
+    <div class="chips">
+      <span class="chip"><b>PhD</b> · cum laude, top 10%</span>
+      <span class="chip"><b>11</b> publications · Nature LS&amp;A 2026</span>
+      <span class="chip"><b>eGameX</b> · Co-founder &amp; CTO</span>
+      <span class="chip"><b>Cursor · Claude · MCP</b></span>
+    </div>
+    <div class="cta-row">
+      <a href="#egamex" class="btn btn-primary">See the work</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<!-- eGameX -->
+<section id="egamex">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Flagship — live product</span>
+      <h2>Owned end-to-end, built with agents.</h2>
+    </div>
+    <div class="flag reveal">
+      <div class="flag-top">
+        <div class="flag-title">eGameX</div>
+        <span class="live"><span class="dot"></span>Live at egamex.eu</span>
+      </div>
+      <div class="flag-body">
+        <p>A live esports SaaS platform I co-founded and lead as CTO. I own the technology end-to-end — backend, frontend, data and deployment — built with structured agentic workflows (Cursor · Claude · MCP) from the first commit through to production.</p>
+        <div class="flag-grid">
+          <div class="it"><span>&rsaquo;</span><div>Multi-sided architecture with a tournament engine and organizer dashboards</div></div>
+          <div class="it"><span>&rsaquo;</span><div>Subscription tiers with streaming integrations and active tournament operations</div></div>
+          <div class="it"><span>&rsaquo;</span><div>AI-driven automation and engagement features</div></div>
+          <div class="it"><span>&rsaquo;</span><div>Execution strategy contributed to the €30k Lazio Innova grant</div></div>
+        </div>
+        <div class="tags">
+          <span class="tag">Next.js</span><span class="tag">SaaS architecture</span>
+          <span class="tag">agentic workflows</span><span class="tag">streaming</span>
+          <a href="https://egamex.eu" target="_blank" rel="noopener" class="tag" style="color:var(--teal);border-color:rgba(98,182,170,.4)">Visit egamex.eu →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Work -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Selected work</span>
+      <h2>AI delivery as Technical Leader.</h2>
+      <p>Production AI projects led or built at Engineering Ingegneria Informatica.</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal"><span class="role">Technical Leader</span><h3>ENEL — Fault Management</h3><p>AI fault-ticket prioritization and analysis: feature engineering, rule-based scoring and progressive ML extensions.</p></div>
+      <div class="card reveal"><span class="role">Technical Leader</span><h3>PanFLU</h3><p>LLM-based decision support for managing actions across phases of strategic plans, with service architecture and knowledge extraction.</p></div>
+      <div class="card reveal"><span class="role">Technical Leader</span><h3>VHT — Virtual Human Twin</h3><p>Synthetic medical data generation inside a federated repository ecosystem, from pipeline requirements to validation.</p></div>
+      <div class="card reveal"><span class="role">Consultant</span><h3>CATENARY · ReLife</h3><p>Evaluation protocol and KPI framework for a proprietary RAG/LLM document-analysis solution: benchmarks, robustness, reporting.</p></div>
+      <div class="card reveal"><span class="role">Contributor</span><h3>TIM — Market Insight</h3><p>CNN-based corporate document classification: modernization, library refactoring and cloud storage migration.</p></div>
+      <div class="card reveal"><span class="role">Contributor</span><h3>LDO</h3><p>LLM + RAG algorithm for ICD9-CM healthcare code suggestion, with domain-specific workflow design.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Research -->
+<section id="research">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Research — multi-scale biomedical imaging</span>
+      <h2>From single cells to skin.</h2>
+    </div>
+    <div class="research-intro reveal">
+      <div class="thesis">
+        <em>“From in vitro to in vivo imaging: advanced computational methods for multi-scale biomedical image analysis.”</em>
+        <p style="color:var(--bone-dim);font-size:.97rem">PhD in Bioengineering, Politecnico di Torino — cum laude, ranked top 10% by the Board. The through-line: pairing deep learning with domain-driven heuristics to make medical images more reliable, validated on real clinical impact rather than metrics alone.</p>
+      </div>
+      <div class="doc-links">
+        <a href="research/PhD_Thesis_Francesco_Branciforti.pdf" target="_blank" rel="noopener">📄 Read the thesis</a>
+        <a href="research/PhD_Thesis_Abstract.pdf" target="_blank" rel="noopener">Abstract</a>
+      </div>
+    </div>
+
+    <div class="scale">
+      <div class="tier reveal">
+        <div class="mark"><span class="unit">µm</span><span class="scope">micro · in vitro</span></div>
+        <h3>Optical coherence microscopy — 3D cancer organoids</h3>
+        <p>CNN segmentation and custom tracking for longitudinal monitoring of organoids, supporting a fully automated pipeline to analyze therapy efficacy (REAP project).</p>
+        <figure class="fig">
+          <img src="assets/organoid_oct_segmentation.jpg" alt="Automatic vs manual segmentation of 3D cancer organoids from OCT images, with DICE score tracked over days">
+          <figcaption>Automatic vs manual organoid segmentation from OCT, tracked across days. From Branciforti F, et al., <i>Diagnostics</i>, 2024 (CC BY 4.0) · <a href="https://doi.org/10.3390/diagnostics14121217" target="_blank" rel="noopener">DOI</a></figcaption>
+        </figure>
+      </div>
+
+      <div class="tier reveal">
+        <div class="mark"><span class="unit">mm</span><span class="scope">tissue</span></div>
+        <h3>Fluorescence microscopy enhancement</h3>
+        <p>A hybrid wavelet + deep-learning framework that enhances fluorescence images, enabling low-energy, sample-preserving acquisition without sacrificing detail.</p>
+      </div>
+
+      <div class="tier reveal">
+        <div class="mark"><span class="unit">cm</span><span class="scope">macro · in vivo</span></div>
+        <h3>Dermoscopy — GANs for color &amp; resolution</h3>
+        <p>Two flagship contributions making in-vivo skin imaging more consistent and informative for both clinicians and downstream AI.</p>
+        <div class="spot">
+          <figure>
+            <div class="spot-text"><div class="lbl">🎨 GAN-based color constancy</div><div class="desc">DermoCC-GAN normalizes images shot under different lighting into a consistent color space.</div></div>
+            <div class="fig">
+              <img src="assets/dermocc_gan_color_constancy.jpg" alt="Dermoscopic images under varied lighting normalized to a consistent appearance by DermoCC-GAN">
+              <figcaption>Varied lighting (top) normalized by DermoCC-GAN (bottom). Salvi M, Branciforti F, et al., <i>Comput. Methods Programs Biomed.</i>, 2022 · <a href="https://doi.org/10.1016/j.cmpb.2022.107040" target="_blank" rel="noopener">DOI</a></figcaption>
+            </div>
+          </figure>
+          <figure>
+            <div class="spot-text"><div class="lbl">🔍 Synthetic degradation for super-resolution</div><div class="desc">Training SR models on synthetically degraded images recovers diagnostic detail when real pairs are scarce.</div></div>
+            <div class="fig">
+              <img src="assets/dermasr_synthetic_degradation.jpg" alt="Real high-quality versus synthetically degraded low-quality dermoscopic images">
+              <figcaption>Real high-quality vs synthetically degraded inputs for training. Branciforti F, et al., <i>Electronics</i>, 2025 (CC BY 4.0) · <a href="https://doi.org/10.3390/electronics14153138" target="_blank" rel="noopener">DOI</a></figcaption>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Publications -->
+<section id="publications">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Publications</span>
+      <h2>Peer-reviewed output.</h2>
+    </div>
+    <div class="pub-feat reveal">
+      <span class="star">★ Featured</span>
+      <div class="t">Optical coherence photoacoustic microscopy for 3D cancer model imaging with AI-assisted organoid analysis</div>
+      <div class="v"><b>Light: Science &amp; Applications</b> (Nature Publishing), 2026 · <a href="https://doi.org/10.1038/s41377-025-02177-2" target="_blank" rel="noopener" style="color:var(--amber)">DOI ↗</a></div>
+    </div>
+
+    <div class="pub-grp reveal">
+      <span class="gname">🩺 Dermatological imaging</span>
+      <ul>
+        <li><b>Ferraris A, Branciforti F, et al.</b> No-Reference Quality Assessment of Dermoscopic Images Using Minimal Expert Supervision. <span class="j">Applied Sciences</span>, 2026.<a href="https://doi.org/10.3390/app16041682" target="_blank" rel="noopener">DOI</a></li>
+        <li><b>Branciforti F, et al.</b> Impact of AI-based color constancy on dermoscopical assessment of skin lesions. <span class="j">Skin Research and Technology</span>, 2023.<a href="https://doi.org/10.1111/srt.13508" target="_blank" rel="noopener">DOI</a></li>
+        <li><b>Branciforti F, et al.</b> Quality enhancement of dermatological images using GANs. <span class="j">GNB 2023</span> (oral).</li>
+      </ul>
+    </div>
+
+    <div class="pub-grp reveal">
+      <span class="gname">🔬 Microscopy &amp; organoids</span>
+      <ul>
+        <li><b>Branciforti F, et al.</b> Segmentation and Multi-Timepoint Tracking of 3D Cancer Organoids from OCT Images. <span class="j">Diagnostics</span>, 2024.<a href="https://doi.org/10.3390/diagnostics14121217" target="_blank" rel="noopener">DOI</a></li>
+        <li><b>Branciforti F, et al.</b> Hybrid Wavelet-Deep Learning Framework for Fluorescence Microscopy Enhancement. <span class="j">Int. J. Imaging Syst. Technol.</span>, 2024.<a href="https://doi.org/10.1002/ima.23212" target="_blank" rel="noopener">DOI</a></li>
+      </ul>
+    </div>
+
+    <div class="pub-grp reveal">
+      <span class="gname">🧠 Generative models &amp; methodology</span>
+      <ul>
+        <li><b>Salvi M, Branciforti F, et al.</b> Generative models for color normalization in digital pathology and dermatology. <span class="j">Expert Systems with Applications</span>, 2024.<a href="https://doi.org/10.1016/j.eswa.2023.123105" target="_blank" rel="noopener">DOI</a></li>
+        <li><b>Michielli N, …, Branciforti F, et al.</b> Parametric kernels for artifact mitigation in patch-based image aggregation. <span class="j">Computer Vision and Image Understanding</span>, 2025.<a href="https://doi.org/10.1016/j.cviu.2025.104457" target="_blank" rel="noopener">DOI</a></li>
+      </ul>
+    </div>
+
+    <div class="pub-grp reveal">
+      <span class="gname">📱 Clinical &amp; teledermoscopy (co-author)</span>
+      <ul>
+        <li><b>Veronese F, …, Branciforti F, et al.</b> Teledermoscopy with the Nurugo Derma smartphone microscope. <span class="j">Diagnostics</span>, 2022.<a href="https://doi.org/10.3390/diagnostics12061371" target="_blank" rel="noopener">DOI</a></li>
+        <li><b>Veronese F, Branciforti F, et al.</b> Smartphone-based skin-lesion classification using CNNs. <span class="j">Diagnostics</span>, 2021.<a href="https://doi.org/10.3390/diagnostics11030451" target="_blank" rel="noopener">DOI</a></li>
+      </ul>
+    </div>
+    <p class="scholar reveal"><b>11 publications</b> · ~180 citations — <a href="https://scholar.google.com/citations?user=VHpzXFAAAAAJ" target="_blank" rel="noopener">full profile on Google Scholar ↗</a></p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Stack -->
+<section id="stack">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Skills &amp; stack</span>
+      <h2>What I build with.</h2>
+    </div>
+    <div class="reveal">
+      <div class="stack-row"><div class="k">Languages</div><div class="pills"><span class="pill">Python</span><span class="pill">MATLAB</span><span class="pill">SQL</span></div></div>
+      <div class="stack-row"><div class="k">AI / ML</div><div class="pills"><span class="pill">PyTorch</span><span class="pill">TensorFlow / Keras</span><span class="pill">Transformers</span><span class="pill">scikit-learn</span><span class="pill">generative models</span><span class="pill">synthetic data</span></div></div>
+      <div class="stack-row"><div class="k">LLM &amp; RAG</div><div class="pills"><span class="pill">LangChain</span><span class="pill">FAISS</span><span class="pill">BM25</span><span class="pill">prompt engineering</span><span class="pill">benchmark design</span><span class="pill">retrieval metrics</span></div></div>
+      <div class="stack-row"><div class="k">Agentic coding</div><div class="pills"><span class="pill">Cursor</span><span class="pill">Claude</span><span class="pill">MCP</span><span class="pill">AI-assisted refactoring</span></div></div>
+      <div class="stack-row"><div class="k">Computer vision</div><div class="pills"><span class="pill">OpenCV</span><span class="pill">scikit-image</span><span class="pill">OCT image analysis</span></div></div>
+      <div class="stack-row"><div class="k">Backend &amp; infra</div><div class="pills"><span class="pill">FastAPI</span><span class="pill">Docker</span><span class="pill">Podman</span><span class="pill">Linux</span><span class="pill">RabbitMQ</span></div></div>
+      <div class="stack-row"><div class="k">Data &amp; storage</div><div class="pills"><span class="pill">PostgreSQL</span><span class="pill">Oracle</span><span class="pill">pandas</span><span class="pill">NumPy</span></div></div>
+      <div class="stack-row"><div class="k">Regulated healthcare</div><div class="pills"><span class="pill">ISO 13485</span><span class="pill">ISO 14971</span><span class="pill">MDR</span><span class="pill">GDPR-aware</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="wrap contact">
+    <div class="reveal">
+      <span class="eyebrow" style="text-align:center">Contact</span>
+      <h2>Let's build something that ships.</h2>
+      <p class="avail">● Available for freelance AI &amp; software projects</p>
+      <div class="contact-links">
+        <a href="mailto:francescobranciforti@icloud.com" class="btn btn-primary">Email me</a>
+        <a href="https://www.linkedin.com/in/francescobranciforti" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+        <a href="https://egamex.eu" target="_blank" rel="noopener" class="btn btn-ghost">eGameX</a>
+        <a href="https://scholar.google.com/citations?user=VHpzXFAAAAAJ" target="_blank" rel="noopener" class="btn btn-ghost">Google Scholar</a>
+        <a href="https://github.com/FrancescoBranciforti95" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Francesco Branciforti — Turin, IT · 🇮🇹 Italian · 🇬🇧 English · Designed &amp; built with agentic coding</p>
+  </div>
+</footer>
+
+<script>
+  // scroll progress
+  const prog=document.getElementById('progress');
+  const onScroll=()=>{const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight);prog.style.width=(p*100)+'%';};
+  document.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // mobile nav
+  const tog=document.getElementById('navToggle'),links=document.getElementById('navLinks');
+  tog.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // active nav link
+  const secs=[...document.querySelectorAll('section[id]')];
+  const navA=[...document.querySelectorAll('.nav-links a')];
+  const spy=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){const id=e.target.id;navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));}})},{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>spy.observe(s));
+</script>
+</body>
+</html>
